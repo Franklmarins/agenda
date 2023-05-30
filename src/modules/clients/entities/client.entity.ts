@@ -1,11 +1,14 @@
-import { randomUUID } from 'crypto';
+import { Exclude } from 'class-transformer';
+import { randomUUID } from 'node:crypto';
 
 export class Client {
-  id: string;
+  readonly id: string;
   name: string;
   email: string;
   phone: string;
   createdAt: Date;
+
+  @Exclude()
   password: string;
 
   constructor() {

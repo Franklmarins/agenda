@@ -19,19 +19,19 @@ export class ClientInMemoryRepository implements ClientsRepository {
     return clients;
   }
   findOne(id: string): Client | Promise<Client> {
-    const client = this.database.find((client) => (client.id = id));
+    const client = this.database.find((client) => client.id == id);
 
     return client;
   }
   update(id: string, data: UpdateClientDto): Client | Promise<Client> {
-    const clientIndex = this.database.findIndex((client) => (client.id = id));
+    const clientIndex = this.database.findIndex((client) => client.id == id);
 
     this.database[clientIndex] = { ...this.database[clientIndex], ...data };
 
     return this.database[clientIndex];
   }
   delete(id: string): void | Promise<void> {
-    const clientIndex = this.database.findIndex((client) => (client.id = id));
+    const clientIndex = this.database.findIndex((client) => client.id == id);
 
     this.database.splice(clientIndex, 1);
     return;
