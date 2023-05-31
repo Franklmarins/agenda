@@ -5,6 +5,10 @@ import { ClientsRepository } from '../clients.repository';
 import { plainToInstance } from 'class-transformer';
 
 export class ClientInMemoryRepository implements ClientsRepository {
+  findByEmail(email: string): Client | Promise<Client> {
+    const client = this.database.find((client) => client.email == email);
+    return plainToInstance(Client, client);
+  }
   private database: Client[] = [];
   create(data: CreateClientDto): Promise<Client> | Client {
     const newClient = new Client();

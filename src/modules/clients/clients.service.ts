@@ -13,7 +13,7 @@ export class ClientsService {
   }
 
   async findAll() {
-    return this.clientsRepository;
+    return this.clientsRepository.findAll();
   }
 
   async findOne(id: string) {
@@ -21,6 +21,11 @@ export class ClientsService {
     if (!client) {
       throw new NotFoundException('Client not found');
     }
+    return client;
+  }
+
+  async findByEmail(email: string) {
+    const client = await this.clientsRepository.findByEmail(email);
     return client;
   }
 
