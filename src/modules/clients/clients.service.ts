@@ -5,19 +5,19 @@ import { ClientsRepository } from './repositories/clients.repository';
 
 @Injectable()
 export class ClientsService {
-  constructor(private clientRepository: ClientsRepository) {}
+  constructor(private clientsRepository: ClientsRepository) {}
   async create(createClientDto: CreateClientDto) {
-    const client = await this.clientRepository.create(createClientDto);
+    const client = await this.clientsRepository.create(createClientDto);
 
     return client;
   }
 
   async findAll() {
-    return this.clientRepository;
+    return this.clientsRepository;
   }
 
   async findOne(id: string) {
-    const client = await this.clientRepository.findOne(id);
+    const client = await this.clientsRepository.findOne(id);
     if (!client) {
       throw new NotFoundException('Client not found');
     }
@@ -25,19 +25,18 @@ export class ClientsService {
   }
 
   async update(id: string, updateClientDto: UpdateClientDto) {
-    const client = await this.clientRepository.findOne(id);
+    const client = await this.clientsRepository.findOne(id);
     if (!client) {
       throw new NotFoundException('Client not found');
     }
-    return await this.clientRepository.update(id, updateClientDto);
+    return await this.clientsRepository.update(id, updateClientDto);
   }
 
   async remove(id: string) {
-    const client = await this.clientRepository.findOne(id);
-
+    const client = await this.clientsRepository.findOne(id);
     if (!client) {
       throw new NotFoundException('Client not found');
     }
-    return await this.clientRepository.delete(id);
+    return await this.clientsRepository.delete(id);
   }
 }
